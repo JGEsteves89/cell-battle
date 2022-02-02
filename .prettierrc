@@ -15,7 +15,5 @@
 	"semi": true,
 	"tabWidth": 2,
 	"trailingComma": "es5",
-	"vueIndentScriptAndStyle": false,
-	"filepath": "c:\\dev\\cell-battle\\app.ts",
-	"parser": "typescript"
+	"vueIndentScriptAndStyle": false
 }
