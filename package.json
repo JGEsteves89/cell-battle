@@ -1,0 +1,30 @@
+{
+  "name": "cell-battle",
+  "version": "1.0.0",
+  "description": "Proof of concept for a game where cells battle each other",
+  "main": "app.ts",
+  "scripts": {
+    "start": "tsc && live-server ./public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JGEsteves89/cell-battle.git"
+  },
+  "author": "JGEsteves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JGEsteves89/cell-battle/issues"
+  },
+  "homepage": "https://github.com/JGEsteves89/cell-battle#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.8.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.3.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
+}
