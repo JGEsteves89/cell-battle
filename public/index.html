@@ -1,14 +1,28 @@
+<style>
+	.centered {
+		position: absolute;
+		/* left: 50%;
+		margin-right: -50%;
+		transform: translate(-50%, 8%);
+		height: 78%;
+		width: 78%;
+		max-width: 78vh;
+		max-height: 78vw; */
+		user-select: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+	}
+</style>
 <html>
+	<head>
+		<title>Cell Battle</title>
+		<script type="module" src="/js/app.js"></script>
+	</head>
 
-<head>
-	<title>Cell Battle</title>
-	<script type="module" src="/js/app.js"></script>
-</head>
-
-<body>
-	<div >
-		<a>Cell Battle</a>
-	</div>
-</body>
-
+	<body>
+		<div>
+			<a>Cell Battle</a>
+		</div>
+		<canvas class="centered" id="screen"></canvas>
+	</body>
 </html>
