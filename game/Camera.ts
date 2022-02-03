@@ -1,18 +1,15 @@
-import World from './World';
+import Entity from './Entity.js';
+import World from './World.js';
 
-export default class Camera {
+export default class Camera extends Entity {
 	private world: World;
-
-	public position: { x: number; y: number };
-	public size: { width: number; height: number };
 	constructor(world: World, width: number, height: number) {
+		super(0, 0, width, height);
 		this.world = world;
-		this.size = { width, height };
-		this.position = { x: 0, y: 0 };
 	}
 
 	render(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-		const viewingGrids = this.world.getViewingGrids(this.position, this.size);
+		const viewingGrids = this.world.getViewingGrids(this.pos, this.size);
 
 		ctx.beginPath();
 		ctx.fillStyle = '#272727';
@@ -24,13 +21,13 @@ export default class Camera {
 
 		ctx.strokeStyle = '#613F37';
 		for (const grid of viewingGrids) {
-			ctx.rect(grid.x - this.position.x, grid.y - this.position.y, grid.size, grid.size);
+			ctx.rect(grid.x - this.pos.x, grid.y - this.pos.y, grid.size, grid.size);
 		}
 		ctx.stroke();
 
 		for (const object of this.world.objects) {
 			ctx.fillStyle = '#284634';
-			ctx.fillRect(object.x - this.position.x, object.y - this.position.y, 20, 20);
+			ctx.fillRect(object.pos.x - this.pos.x, object.pos.y - this.pos.y, 20, 20);
 		}
 	}
 }

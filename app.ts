@@ -1,12 +1,13 @@
 import World from './game/World.js';
 import Camera from './game/Camera.js';
 import Timer from './game/Timer.js';
+import Vector from './game/Vector.js';
+import RigidBody from './game/RigidBody.js';
 
 function setupCanvas() {
 	const margin = 30;
 	const width = window.innerWidth - margin;
 	const height = window.innerHeight - margin;
-	console.log(width, height);
 
 	const canvas = <HTMLCanvasElement>document.getElementById('screen')!;
 	canvas.setAttribute('width', '' + width);
@@ -19,22 +20,21 @@ function setupCanvas() {
 }
 
 console.log('Starting...');
-
 const { canvas, ctx, width, height } = setupCanvas();
 const timer = new Timer();
 const world = new World();
 const camera = new Camera(world, width, height);
-const player = { x: 0, y: 0, target: { x: 0, y: 0 } };
+const player = new RigidBody(0, 0, 20, 20);
 world.addObject(player);
 let mouseDown = false;
-let target: { x: number; y: number } = { x: 0, y: 0 };
+let target: Vector = new Vector(0, 0);
 canvas.addEventListener('mousedown', (e) => {
-	target = { x: e.offsetX + camera.position.x, y: e.offsetY + camera.position.y };
+	target = new Vector(e.offsetX + camera.pos.x, e.offsetY + camera.pos.y);
 	mouseDown = true;
 });
 canvas.addEventListener('mousemove', (e) => {
 	if (mouseDown) {
-		target = { x: e.offsetX + camera.position.x, y: e.offsetY + camera.position.y };
+		target = new Vector(e.offsetX + camera.pos.x, e.offsetY + camera.pos.y);
 	}
 });
 canvas.addEventListener('mouseup', (e) => {
@@ -43,23 +43,10 @@ canvas.addEventListener('mouseup', (e) => {
 timer.startTimer(renderFunction);
 
 function renderFunction() {
-	player.target = target;
-	let vx = player.target.x - player.x;
-	let vy = player.target.y - player.y;
-	const speed = 10;
-	const s = Math.sqrt(vx * vx + vy * vy);
-	if (s >= 10) {
-		vx = (vx / s) * speed;
-		vy = (vy / s) * speed;
-		player.x += vx;
-		player.y += vy;
-	} else {
-		player.x = target.x;
-		player.y = target.y;
-	}
-	//console.log(target, vx, vy);
+	player.pointTo(target, 0.5, 20);
+	player.update();
 
-	camera.position.x = player.x - camera.size.width / 2;
-	camera.position.y = player.y - camera.size.height / 2;
+	camera.pos.x = player.pos.x - camera.size.width / 2;
+	camera.pos.y = player.pos.y - camera.size.height / 2;
 	camera.render(canvas, ctx);
 }

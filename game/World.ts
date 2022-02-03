@@ -1,6 +1,8 @@
+import Entity from './Entity.js';
+
 export default class World {
 	public grid: Array<any>;
-	public objects: Array<any>;
+	public objects: Array<Entity>;
 	public size = 1000;
 	public gridSize = 100;
 	public rows = this.size / this.gridSize;
@@ -14,7 +16,7 @@ export default class World {
 			}
 		}
 	}
-	addObject(obj: { x: number; y: number }) {
+	addObject(obj: Entity) {
 		this.objects.push(obj);
 	}
 
