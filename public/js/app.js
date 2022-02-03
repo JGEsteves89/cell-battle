@@ -19,21 +19,41 @@ const { canvas, ctx, width, height } = setupCanvas();
 const timer = new Timer();
 const world = new World();
 const camera = new Camera(world, width, height);
-world.addObject(0, 0);
-timer.startTimer(renderFunction);
+const player = { x: 0, y: 0, target: { x: 0, y: 0 } };
+world.addObject(player);
 let mouseDown = false;
-window.addEventListener('mousedown', (e) => {
+let target = { x: 0, y: 0 };
+canvas.addEventListener('mousedown', (e) => {
+    target = { x: e.offsetX + camera.position.x, y: e.offsetY + camera.position.y };
     mouseDown = true;
 });
-window.addEventListener('mousemove', (e) => {
+canvas.addEventListener('mousemove', (e) => {
     if (mouseDown) {
-        camera.position.x -= e.movementX;
-        camera.position.y -= e.movementY;
+        target = { x: e.offsetX + camera.position.x, y: e.offsetY + camera.position.y };
     }
 });
-window.addEventListener('mouseup', (e) => {
+canvas.addEventListener('mouseup', (e) => {
     mouseDown = false;
 });
+timer.startTimer(renderFunction);
 function renderFunction() {
+    player.target = target;
+    let vx = player.target.x - player.x;
+    let vy = player.target.y - player.y;
+    const speed = 10;
+    const s = Math.sqrt(vx * vx + vy * vy);
+    if (s >= 10) {
+        vx = (vx / s) * speed;
+        vy = (vy / s) * speed;
+        player.x += vx;
+        player.y += vy;
+    }
+    else {
+        player.x = target.x;
+        player.y = target.y;
+    }
+    //console.log(target, vx, vy);
+    camera.position.x = player.x - camera.size.width / 2;
+    camera.position.y = player.y - camera.size.height / 2;
     camera.render(canvas, ctx);
 }

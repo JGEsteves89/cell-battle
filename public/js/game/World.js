@@ -4,16 +4,16 @@ export default class World {
         this.gridSize = 100;
         this.rows = this.size / this.gridSize;
         this.cols = this.size / this.gridSize;
+        this.objects = [];
         this.grid = [];
         for (let y = 0; y < this.size; y += this.gridSize) {
             for (let x = 0; x < this.size; x += this.gridSize) {
-                this.grid.push({ x, y, size: this.gridSize, objects: [] });
+                this.grid.push({ x, y, size: this.gridSize });
             }
         }
     }
-    addObject(x, y) {
-        const index = this.coordinatesToGrid(x, y);
-        this.grid[index].objects.push({ x, y });
+    addObject(obj) {
+        this.objects.push(obj);
     }
     coordinatesToGrid(x, y) {
         const xComp = (x / this.gridSize) | 0;

@@ -15,21 +15,22 @@ export default class Camera {
 		const viewingGrids = this.world.getViewingGrids(this.position, this.size);
 
 		ctx.beginPath();
-		ctx.fillStyle = '#38785D';
+		ctx.fillStyle = '#272727';
 		ctx.strokeStyle = 'black';
 		ctx.rect(0, 0, canvas.width, canvas.height);
 		ctx.stroke();
 		ctx.fill();
 		ctx.closePath();
 
-		ctx.strokeStyle = '#BACCF5';
+		ctx.strokeStyle = '#613F37';
 		for (const grid of viewingGrids) {
 			ctx.rect(grid.x - this.position.x, grid.y - this.position.y, grid.size, grid.size);
-			for (const object of grid.objects) {
-				ctx.fillStyle = '#FF9D00';
-				ctx.fillRect(object.x - this.position.x, object.y - this.position.y, 20, 20);
-			}
 		}
 		ctx.stroke();
+
+		for (const object of this.world.objects) {
+			ctx.fillStyle = '#284634';
+			ctx.fillRect(object.x - this.position.x, object.y - this.position.y, 20, 20);
+		}
 	}
 }

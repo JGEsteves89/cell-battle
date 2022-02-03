@@ -1,20 +1,21 @@
 export default class World {
 	public grid: Array<any>;
+	public objects: Array<any>;
 	public size = 1000;
 	public gridSize = 100;
 	public rows = this.size / this.gridSize;
 	public cols = this.size / this.gridSize;
 	constructor() {
+		this.objects = [];
 		this.grid = [];
 		for (let y = 0; y < this.size; y += this.gridSize) {
 			for (let x = 0; x < this.size; x += this.gridSize) {
-				this.grid.push({ x, y, size: this.gridSize, objects: [] });
+				this.grid.push({ x, y, size: this.gridSize });
 			}
 		}
 	}
-	addObject(x: number, y: number) {
-		const index = this.coordinatesToGrid(x, y);
-		this.grid[index].objects.push({ x, y });
+	addObject(obj: { x: number; y: number }) {
+		this.objects.push(obj);
 	}
 
 	coordinatesToGrid(x: number, y: number) {
