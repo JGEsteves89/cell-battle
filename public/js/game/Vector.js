@@ -46,4 +46,7 @@ export default class Vector {
     rotateByDegrees(degrees) {
         return this.rotateByRadians((degrees * Math.PI) / 180);
     }
+    static get zero() {
+        return new Vector(0, 0);
+    }
 }

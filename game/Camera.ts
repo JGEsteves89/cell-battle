@@ -1,4 +1,5 @@
 import Entity from './Entity.js';
+import Vector from './Vector.js';
 import World from './World.js';
 
 export default class Camera extends Entity {
@@ -7,7 +8,9 @@ export default class Camera extends Entity {
 		super(0, 0, width, height);
 		this.world = world;
 	}
-
+	drag(drag: Vector) {
+		this.pos = this.pos.subtract(drag);
+	}
 	render(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
 		const viewingGrids = this.world.getViewingGrids(this.pos, this.size);
 

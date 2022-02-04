@@ -4,6 +4,9 @@ export default class Camera extends Entity {
         super(0, 0, width, height);
         this.world = world;
     }
+    drag(drag) {
+        this.pos = this.pos.subtract(drag);
+    }
     render(canvas, ctx) {
         const viewingGrids = this.world.getViewingGrids(this.pos, this.size);
         ctx.beginPath();

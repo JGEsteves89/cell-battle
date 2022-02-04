@@ -1,6 +1,7 @@
+import Vector from './Vector.js';
 export default class World {
     constructor() {
-        this.size = 1000;
+        this.size = 5000;
         this.gridSize = 100;
         this.rows = this.size / this.gridSize;
         this.cols = this.size / this.gridSize;
@@ -15,9 +16,9 @@ export default class World {
     addObject(obj) {
         this.objects.push(obj);
     }
-    coordinatesToGrid(x, y) {
-        const xComp = (x / this.gridSize) | 0;
-        const yComp = ((y / this.gridSize) | 0) * this.rows;
+    coordinatesToGrid(coord) {
+        const xComp = (coord.x / this.gridSize) | 0;
+        const yComp = ((coord.y / this.gridSize) | 0) * this.rows;
         return xComp + yComp;
     }
     gridToCoordinates(i) {
@@ -34,7 +35,7 @@ export default class World {
         const ey = Math.min(pos.y + size.height, this.size);
         for (let y = sy; y < ey; y += this.gridSize) {
             for (let x = sx; x < ex; x += this.gridSize) {
-                const index = this.coordinatesToGrid(x, y);
+                const index = this.coordinatesToGrid(new Vector(x, y));
                 viewingGrids.push(this.grid[index]);
             }
         }
