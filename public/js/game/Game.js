@@ -1,0 +1,26 @@
+import World from './World.js';
+import Camera from './Camera.js';
+import Timer from './Timer.js';
+import RigidBody from './RigidBody.js';
+import Controller from './Controller.js';
+export default class Game {
+    constructor(canvas, ctx, width, height) {
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.timer = new Timer();
+        this.world = new World();
+        this.camera = new Camera(this.world, width, height);
+        this.controller = new Controller(canvas, this.camera);
+        this.controller.setDragCameraHandle(this.camera.drag.bind(this.camera));
+        this.controller.setMovePlayerHandle(this.player.pointTo.bind(this.player));
+        this.player = new RigidBody(0, 0, 50, 50);
+        this.world.addObject(this.player);
+    }
+    start() {
+        this.timer.startTimer(this.renderFunction.bind(this));
+    }
+    renderFunction(deltaTime) {
+        this.world.update(deltaTime);
+        this.camera.render(this.canvas, this.ctx);
+    }
+}

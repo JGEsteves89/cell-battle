@@ -1,10 +1,5 @@
 This still remaining:
 
-[ ] - Refactor the movement system (arriving)
-[ ] - Create a world map
-[ ] - Create gizmos with position of the map, player, etc
-[ ] - Refactor update and rendering place
-[ ] - Refactor app loading the the remaining objects
 [ ] - Generate the particle system
 [ ] - Create the particle
 [ ] - Make particles sorround the object
@@ -12,8 +7,14 @@ This still remaining:
 [ ] - Ensure that the particles move with the player
 [ ] -
 [ ] -
-[ ] -
 
 2022-04-02
 [X] - Create a controller
 [X] - Decouple camera with the player
+
+2022-04-06
+[X] - Refactor the movement system (arriving)
+[X] - Create a world map
+[X] - Create gizmos with position of the map, player, etc
+[X] - Refactor update and rendering place
+[X] - Refactor app loading

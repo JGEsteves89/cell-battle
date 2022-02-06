@@ -27,6 +27,7 @@ export default class World {
 		const yComp = ((coord.y / this.gridSize) | 0) * this.rows;
 		return xComp + yComp;
 	}
+
 	gridToCoordinates(i: number) {
 		const ix = i % this.rows | 0;
 		const x = ix * this.gridSize;
@@ -46,5 +47,10 @@ export default class World {
 			}
 		}
 		return viewingGrids;
+	}
+	update(deltaTime: number) {
+		for (const object of this.objects) {
+			object.update(deltaTime);
+		}
 	}
 }

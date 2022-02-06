@@ -41,4 +41,9 @@ export default class World {
         }
         return viewingGrids;
     }
+    update(deltaTime) {
+        for (const object of this.objects) {
+            object.update(deltaTime);
+        }
+    }
 }
